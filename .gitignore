@@ -1,0 +1,9 @@
+# Root-level ignores (server/ and client/ have their own .gitignore)
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+coverage/
+dist/

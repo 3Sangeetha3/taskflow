@@ -1,0 +1,58 @@
+# VS Code REST Client. Run "Create" first; its id is captured as {{created.response.body.data.id}}.
+@base = http://localhost:5000/api/tasks
+@missing = 6730a1b2c3d4e5f6a7b8c9d0
+
+### Create (201)
+# @name created
+POST {{base}}
+Content-Type: application/json
+
+{ "title": "Ship MERN assignment", "priority": "High", "dueDate": "2026-11-15" }
+
+### Create: unknown field (400, names "foo")
+POST {{base}}
+Content-Type: application/json
+
+{ "title": "Valid title", "foo": 1 }
+
+### List with combined filters (200)
+GET {{base}}?search=mern&status=Pending&priority=High&page=1&limit=20
+
+### List: injection-style query (400)
+GET {{base}}?status[$ne]=x
+
+### Get one (200)
+GET {{base}}/{{created.response.body.data.id}}
+
+### Get one: missing (404)
+GET {{base}}/{{missing}}
+
+### Replace (200): omitted fields reset to defaults
+PUT {{base}}/{{created.response.body.data.id}}
+Content-Type: application/json
+
+{ "title": "Ship MERN assignment v2", "status": "In Progress" }
+
+### Replace: malformed id (400)
+PUT {{base}}/abc
+Content-Type: application/json
+
+{ "title": "Whatever" }
+
+### Update status (200)
+PATCH {{base}}/{{created.response.body.data.id}}/status
+Content-Type: application/json
+
+{ "status": "Completed" }
+
+### Update status: invalid value (400)
+PATCH {{base}}/{{created.response.body.data.id}}/status
+Content-Type: application/json
+
+{ "status": "done" }
+
+### Delete (200)
+DELETE {{base}}/{{created.response.body.data.id}}
+
+### Delete again (404)
+DELETE {{base}}/{{created.response.body.data.id}}

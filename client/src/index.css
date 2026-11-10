@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens: the ONLY place colors, radii, fonts and shadows are defined.
+ * The default Tailwind palette is removed (--color-*: initial), so components can only use
+ * these semantic, role-based tokens (bg-surface, text-ink-muted, border-line, bg-accent, ...).
+ * Every text/background pair used in the UI was checked for WCAG AA (>= 4.5:1).
+ */
+@theme {
+  --color-*: initial;
+
+  --color-canvas: #f6f7f8;
+  --color-surface: #ffffff;
+  --color-surface-muted: #eef0f2;
+  --color-line: #dde1e6;
+  --color-line-strong: #b9c0c9;
+  --color-backdrop: #1f293366;
+
+  --color-ink: #1f2933;
+  --color-ink-muted: #4f5b69;
+  --color-ink-subtle: #5e6977;
+
+  --color-accent: #1f5f5b;
+  --color-accent-hover: #174946;
+  --color-accent-soft: #e4f0ef;
+  --color-on-accent: #ffffff;
+
+  --color-danger: #b42318;
+  --color-danger-soft: #fdecea;
+  --color-success: #1e7b4f;
+  --color-success-soft: #e6f4ec;
+  --color-warning: #a15c07;
+  --color-warning-soft: #fcf1e1;
+  --color-info: #2b5c9e;
+  --color-info-soft: #e8eff8;
+
+  --color-focus-ring: #1f5f5b;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --shadow-overlay: 0 8px 24px -12px #1f293340;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas font-sans text-sm text-ink antialiased;
+  }
+}
